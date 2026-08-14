@@ -10,13 +10,13 @@
 
 ## 📌 Project Overview
 
-**Portfolio.io** is a full-stack, quantitative finance and AI engineering portfolio platform built with **React**, **Tailwind CSS**, and **Supabase PostgreSQL**, inspired by modern QRT dark-themed trading desk interfaces. Designed for high scannability and technical depth, the application showcases quantitative trading tools, fixed-income yield curve analytics, deep learning models, and GenAI microservices while featuring interactive full-screen diagram Lightboxes, smooth tab navigation, and live data synchronization.
+Portfolio.io is a simple interface to respresent my project and experiences in a vulgarized way for recruiters, i used react and vite for synchronization and UI performance also deployment advantages .
 
 ---
 
 ## 💡 Highlighted Feature: Real-Time DB Project Toast
 
-Upon first arrival, the application dynamically displays a floating bottom-right toast notification highlighting your latest research or SaaS project.
+Upon first arrival, the application dynamically displays a floating bottom-right toast notification highlighting my latest project storaed inprojects_table/pg database, used parallelly for cv generation api. the database is hosted in supabase server .
 
 ### 🔄 Shared Supabase Architecture
 Rather than relying on hardcoded static data, the portfolio connects directly to your hosted **Supabase PostgreSQL** database—specifically querying the shared `public.projects` table used across your **CV_GEN / Get_CV API** ecosystem.
