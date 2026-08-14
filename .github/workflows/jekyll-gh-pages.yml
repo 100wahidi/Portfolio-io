@@ -1,0 +1,44 @@
+name: Deploy Portfolio to Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 1. Set working directory to your subfolder name
+ # <-- Replace with the folder name shown in your debug log
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Application
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs' # <-- Path to build output inside subfolder
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
