@@ -1,0 +1,54 @@
+{
+  "name": "portfolio-io",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio site for Mouad Wahidi - Quant & AI Engineer",
+  "keywords": [
+    "portfolio",
+    "react",
+    "vite",
+    "quant",
+    "ai"
+  ],
+  "homepage": "https://100wahidi.github.io/Portfolio-io/",
+  "bugs": {
+    "url": "https://github.com/100wahidi/Portfolio-io/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/100wahidi/Portfolio-io.git"
+  },
+  "license": "MIT",
+  "author": "Mouad Wahidi",
+  "type": "module",
+  "main": "vite.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:gh": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "start": "vite preview --port 5173"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "lucide-react": "^1.31.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-icons": "^5.7.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "autoprefixer": "^10.5.4",
+    "oxlint": "^1.75.0",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.0"
+  }
+}
