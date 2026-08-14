@@ -1,18 +1,30 @@
 {
-  "name": "portfolio-iotous",
-  "private": true,
+  "name": "portfolio-io",
   "version": "1.0.0",
+  "private": true,
   "description": "Portfolio site for Mouad Wahidi - Quant & AI Engineer",
-  "type": "module",
-  "homepage": "https://100wahidi.github.io/Portfolio-iotous/",
+  "keywords": [
+    "portfolio",
+    "react",
+    "vite",
+    "quant",
+    "ai"
+  ],
+  "homepage": "https://100wahidi.github.io/Portfolio-io/",
+  "bugs": {
+    "url": "https://github.com/100wahidi/Portfolio-io/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/100wahidi/Portfolio-iotous.git"
-  },
-  "bugs": {
-    "url": "https://github.com/100wahidi/Portfolio-iotous/issues"
+    "url": "git+https://github.com/100wahidi/Portfolio-io.git"
   },
   "license": "MIT",
+  "author": "Mouad Wahidi",
+  "type": "module",
+  "main": "vite.config.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -21,8 +33,6 @@
     "preview": "vite preview",
     "start": "vite preview --port 5173"
   },
-  "keywords": ["portfolio", "react", "vite", "quant", "ai"],
-  "author": "Mouad Wahidi",
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",
     "@tailwindcss/vite": "^4.3.3",
