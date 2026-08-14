@@ -4,12 +4,16 @@ on:
   push:
     branches:
       - main
-      - master
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+# 1. Set working directory to your subfolder name
+defaults:
+  run:
+    working-directory: ./Portfolio-io # <-- Replace with the folder name shown in your debug log
 
 jobs:
   build-and-deploy:
@@ -35,7 +39,7 @@ jobs:
       - name: Upload Build Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs' # <-- Path to build output inside subfolder
+          path: './Portfolio-io/dist' # <-- Path to build output inside subfolder
 
       - name: Deploy to GitHub Pages
         id: deployment
