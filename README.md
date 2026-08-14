@@ -1,4 +1,4 @@
-# 📈 Portfolio.io — Quantitative & AI Engineering Portfolio
+# Portfolio.io — Quantitative & AI Engineering Portfolio
 
 ![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white)
