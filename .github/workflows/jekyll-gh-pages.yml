@@ -1,57 +1,12 @@
-name: Deploy Portfolio to Production
+name: Checkout Code
+uses: actions/checkout@v4
 
-on:
-  push:
-    branches:
-      - main # Triggers build and deploy on push to main branch
-      - master
-
-# Grant permissions required for GitHub Pages deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: false
-
-jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-
-    steps:
-      # Step 1: Checkout repository code
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      # Step 2: Set up Node.js 24
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      # Step 3: Install dependencies from root package.json
-      - name: Install Dependencies
-        run: npm install
-
-      # Step 4: Build Vite project with injected Supabase secrets
-      - name: Build Application
-        env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-        run: npm run build
-
-      # Step 5: Upload dist artifact
-      - name: Upload Build Artifacts
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './docs'
-
-      # Step 6: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    # 🔍 DIAGNOSTIC STEP: Print folder structure
+    name: Debug File Paths
+    run: |
+          echo "=== Current Directory ==="
+          pwd
+          echo "=== Root Files ==="
+          ls -la
+          echo "=== Searching for package.json ==="
+          find . -name "package.json" -not -path "*/node_modules/*"
