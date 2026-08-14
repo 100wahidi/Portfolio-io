@@ -125,7 +125,7 @@ const EXPERIENCES = [
     role: "Data & Software Engineering Intern (PFE)",
     period: "FEB 2026 – JUNE 2026",
     location: "Casablanca, Morocco",
-    image: '${import.meta.env.BASE_URL}SG_ATS.png', // Image placeholder
+    image: import.meta.env.BASE_URL+'SG_ATS.png', // Image placeholder
     desc: "Engineered a centralized Data Quality API using Python, FastAPI, SQL, and Pandera for financial risk management. Optimized PostgreSQL query latency and automated MLOps pipelines with Docker and CI/CD."
   },
   {
@@ -134,7 +134,7 @@ const EXPERIENCES = [
     role: "Quantitative Analyst Intern",
     period: "JUNE 2025 – AUG 2025",
     location: "Casablanca, Morocco",
-    image: '${import.meta.env.BASE_URL}AWB.png', // Image placeholder
+    image: import.meta.env.BASE_URL+'AWB.png', // Image placeholder
     desc: "Developed time-series forecasting models (ARIMA) for interest rate dynamics. Built fixed-income portfolio pricing and risk tools alongside real-time Streamlit and Plotly sensitivity tracking dashboards."
   },
   {
@@ -143,7 +143,7 @@ const EXPERIENCES = [
     role: "Operations Research & Optimization Intern",
     period: "JULY 2024 – AUG 2024",
     location: "Jorf Lasfar, Morocco",
-    image: '${import.meta.env.BASE_URL}VRP.png', // Image placeholder
+    image: import.meta.env.BASE_URL+'VRP.png', // Image placeholder
     desc: "Formulated constrained mathematical optimization algorithms for Vehicle Routing Problems with Time Windows (VRPTW) and preprocessed industrial-scale logistics datasets."
   }
 ];
@@ -153,7 +153,7 @@ const PROJECTS = [
     id: "get-cv",
     title: "GET_CV: GENAI RAG PLATFORM",
     category: "AI & DATA PLATFORM",
-    image: '${import.meta.env.BASE_URL}CV_GEN.png', // Image placeholder
+    image: import.meta.env.BASE_URL+'CV_GEN.png', // Image placeholder
     desc: "Full-stack SaaS platform integrating LangChain, Supabase, and pgvector for semantic search and document generation with prompt engineering guardrails.",
     link: "https://github.com/100wahidi"
   },
@@ -161,7 +161,7 @@ const PROJECTS = [
     id: "anomaly",
     title: "FINANCIAL ANOMALY DETECTION",
     category: "QUANTITATIVE ML",
-    image: '${import.meta.env.BASE_URL}AEs.png', // Image placeholder
+    image: import.meta.env.BASE_URL+'AEs.png', // Image placeholder
     desc: "PyTorch deep learning framework evaluating Autoencoder variants (Vanilla, Sparse, Denoising) for anomaly detection in banking datasets using ROC-AUC validation.",
     link: "https://github.com/100wahidi"
   }
@@ -271,7 +271,7 @@ export default function App() {
       {/* 2. HERO BIG BANNER WITH GEOMETRIC OVERLAY (Matches Screenshot 1) */}
       <section className="relative w-full h-80 sm:h-96 overflow-hidden border-b border-white/10">
         <img 
-          src='${import.meta.env.BASE_URL}EMI_BACK.jpg' 
+          src={import.meta.env.BASE_URL + 'EMI_BACK.jpg'} 
           alt="Quant Research Desk" 
           onError={(e) => {
             e.currentTarget.style.display = 'none';
