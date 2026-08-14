@@ -1,16 +1,23 @@
-# React + Vite
+# Portfolio-iotous
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This repository is the Vite + React portfolio site for Mouad Wahidi.
+## Scripts
 
-Currently, two official plugins are available:
+- `npm run dev` — start dev server
+- `npm run build` — produce production build (output in `dist`)
+- `npm run preview` — locally preview the built site
+- `npm run start` — same as preview (for local testing)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## GitHub Pages
 
-## React Compiler
+This project is configured to deploy to GitHub Pages automatically via the workflow at `.github/workflows/deploy-gh-pages.yml`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+To manually deploy:
 
-## Expanding the Oxlint configuration
+```bash
+npm ci
+npm run build
+npx gh-pages -d dist
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Replace the repo and homepage fields in `package.json` with your GitHub repo if different.

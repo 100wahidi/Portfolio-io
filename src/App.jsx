@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { supabase } from './lib/supabaseClient'; // Ensure path matches your setup
 import { 
   ExternalLink, 
   Mail, 
@@ -10,7 +11,8 @@ import {
   Database,
   Layers,
   Cpu,
-  ZoomIn
+  ZoomIn,
+  Sparkles
 } from 'lucide-react';
 
 /* QRT Isometric Cube Brand Logo */
@@ -38,6 +40,82 @@ const LinkedinIcon = ({ className = "w-4 h-4" }) => (
     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.762-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
   </svg>
 );
+
+/* Sub-Component: Fetches strictly id, title, content ORDER BY created_at ASC LIMIT 1 */
+function FetchLastProject({ onOpenTab }) {
+  const [lastProject, setLastProject] = useState(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    async function fetchLatestProject() {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('id, title, content')
+          .order('created_at', { ascending: true })
+          .limit(1)
+          .single();
+
+        if (error) throw error;
+
+        if (data) {
+          setLastProject(data);
+          setTimeout(() => setVisible(true), 600); // Smooth entrance delay
+        }
+      } catch (err) {
+        console.error("Error fetching latest project notification:", err.message);
+      }
+    }
+
+    fetchLatestProject();
+  }, []);
+
+  if (!lastProject || !visible) return null;
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 max-w-md w-full sm:w-96 bg-[#0d162a]/95 border border-sky-500/40 rounded-xl p-4 shadow-2xl backdrop-blur-xl animate-fadeIn">
+      {/* Toast Top Header */}
+      <div className="flex items-center justify-between pb-2 border-b border-white/10 mb-3">
+        <div className="flex items-center space-x-2 text-sky-400 font-mono text-[11px] uppercase tracking-widest font-bold">
+          <Sparkles className="w-4 h-4 animate-pulse text-sky-400" />
+          <span>Highlighted Project</span>
+        </div>
+        <button
+          onClick={() => setVisible(false)}
+          className="text-slate-400 hover:text-white p-1 rounded hover:bg-white/10 transition"
+          title="Close notification"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Project Title & Content */}
+      <div className="space-y-2">
+        <h4 className="text-sm font-extrabold text-white uppercase tracking-wider">
+          {lastProject.title}
+        </h4>
+
+        <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed font-sans">
+          {lastProject.content}
+        </p>
+
+        {/* Action Button */}
+        <div className="pt-2 flex justify-end">
+          <button
+            onClick={() => {
+              if (onOpenTab) onOpenTab('projects');
+              setVisible(false);
+            }}
+            className="px-3 py-1.5 bg-sky-500 hover:bg-sky-400 text-[#060a14] font-bold text-[11px] font-mono uppercase tracking-wider rounded transition flex items-center space-x-1"
+          >
+            <span>View All Projects</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* Data with Image Associations for Every Card */
 const EXPERIENCES = [
@@ -395,7 +473,10 @@ export default function App() {
 
       </main>
 
-      {/* 4. EXTRACTED IMAGE LIGHTBOX MODAL */}
+      {/* 4. NOTIFICATION TOAST: HIGHLIGHTS LATEST PROJECT FROM SUPABASE */}
+      <FetchLastProject onOpenTab={(tab) => setActiveTab(tab)} />
+
+      {/* 5. EXTRACTED IMAGE LIGHTBOX MODAL */}
       {modalImage && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/90 backdrop-blur-md animate-fadeIn"
