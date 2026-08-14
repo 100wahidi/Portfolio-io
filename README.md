@@ -34,3 +34,4 @@ Rather than relying on hardcoded static data, the portfolio connects directly to
    |   Portfolio.io Frontend      |  |     CV_GEN / Get_CV API      |
    | (React + Supabase JS Client) |  | (FastAPI + RAG Orchestrator) |
    +------------------------------+  +------------------------------+
+
