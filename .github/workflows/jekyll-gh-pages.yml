@@ -26,15 +26,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository code
+  # Step 1: Checkout repository code
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js environment
+      # Step 2: Set up Node.js 24 environment
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
 
       # Step 3: Install dependencies
@@ -47,7 +47,7 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
-
+        
       # Step 5: Upload build artifact for GitHub Pages
       - name: Upload Build Artifacts
         uses: actions/upload-pages-artifact@v3
