@@ -1,0 +1,125 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+/* =========================================================================
+   1. QRT TYPOGRAPHY & UTILITIES (Tailwind v4 Compliant)
+   ========================================================================= */
+
+/* Left Big Section Title ("ABOUT US") */
+@utility qrt-section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+/* Right Sub-header ("STATE ENGINEER IN...") */
+@utility qrt-header-large {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.5vw, 2.25rem);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+/* Paragraph Body Text */
+@utility qrt-body-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+}
+
+/* QRT Card Containers */
+@utility qrt-card {
+  background-color: rgba(13, 22, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+}
+
+@utility qrt-card-hover {
+  background-color: rgba(13, 22, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+/* =========================================================================
+   2. GLOBAL BASE STYLES & PATTERNS
+   ========================================================================= */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: #080d1a;
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Signature QRT Diagonal Stripe Background Pattern */
+.qrt-bg-pattern {
+  background-color: #080d1a;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.4) 0px,
+    rgba(15, 23, 42, 0.4) 14px,
+    rgba(8, 13, 26, 0.95) 14px,
+    rgba(8, 13, 26, 0.95) 28px
+  );
+}
+
+/* Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080d1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
