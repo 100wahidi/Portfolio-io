@@ -3,17 +3,15 @@ name: Deploy Portfolio to Production
 on:
   push:
     branches:
-      - main
-      - master # Triggers build and deploy on push to main branch
+      - main # Triggers build and deployment on push to main branch
+      - master
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Grant permissions required for GitHub Pages deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: 'pages'
   cancel-in-progress: false
@@ -26,35 +24,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-  # Step 1: Checkout repository code
+      # Step 1: Checkout repository code
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js 24 environment
+      # Step 2: Set up Node.js 24 (without forcing lockfile caching)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
 
-      # Step 3: Install dependencies
+      # Step 3: Install dependencies (works with or without package-lock.json)
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
-      # Step 4: Build project with injected Supabase Environment Variables
+      # Step 4: Build Vite project with injected Supabase environment secrets
       - name: Build Application
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
-        
-      # Step 5: Upload build artifact for GitHub Pages
+
+      # Step 5: Upload build output directory (Vite defaults to 'dist')
       - name: Upload Build Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs' # Vite outputs production builds to the 'dist' folder
+          path: './docs'
 
-      # Step 6: Deploy build artifact to GitHub Pages
+      # Step 6: Deploy build output to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
