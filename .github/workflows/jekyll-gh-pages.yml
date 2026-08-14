@@ -1,12 +1,42 @@
-name: Checkout Code
-uses: actions/checkout@v4
+name: Deploy Portfolio to Production
 
-    # 🔍 DIAGNOSTIC STEP: Print folder structure
-    name: Debug File Paths
-    run: |
-          echo "=== Current Directory ==="
-          pwd
-          echo "=== Root Files ==="
-          ls -la
-          echo "=== Searching for package.json ==="
-          find . -name "package.json" -not -path "*/node_modules/*"
+on:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Application
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs' # <-- Path to build output inside subfolder
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
