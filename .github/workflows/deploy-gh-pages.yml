@@ -1,29 +1,57 @@
-name: Deploy to GitHub Pages
+name: Deploy Portfolio to Production
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main # Triggers build and deployment on push to main branch
+
+# Required permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent concurrent deployments
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Use Node.js 18
+      # Step 1: Checkout repository into runner root
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js 24 environment
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
+          node-version: 24
+
+      # Step 3: Install dependencies directly from root package.json
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Build Vite project with injected Supabase secrets
+      - name: Build Application
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+
+      # Step 5: Upload build output (Vite generates output at ./dist at root)
+      - name: Upload Build Artifacts
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          user_name: 'github-actions'
-          user_email: 'actions@github.com'
+          path: './dist'
+
+      # Step 6: Publish site to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
