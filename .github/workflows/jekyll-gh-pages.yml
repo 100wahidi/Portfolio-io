@@ -3,7 +3,8 @@ name: Deploy Portfolio to Production
 on:
   push:
     branches:
-      - main # Triggers build and deploy on push to main branch
+      - main
+      - master # Triggers build and deploy on push to main branch
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -33,7 +34,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: 'npm'
 
       # Step 3: Install dependencies
