@@ -10,13 +10,13 @@
     "quant",
     "ai"
   ],
-  "homepage": "https://100wahidi.github.io/Portfolio-io/",
+  "homepage": "https://100wahidi.github.io/Personnal_Portfolio_Interface/",
   "bugs": {
-    "url": "https://github.com/100wahidi/Portfolio-io/issues"
+    "url": "https://github.com/100wahidi/Personnal_Portfolio_Interface/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/100wahidi/Portfolio-io.git"
+    "url": "git+https://github.com/100wahidi/Personnal_Portfolio_Interface/.git"
   },
   "license": "MIT",
   "author": "Mouad Wahidi",
